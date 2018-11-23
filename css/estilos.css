@@ -1,0 +1,58 @@
+#btnNuevo{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+.vistaListaReportes{
+	padding:  10px 0px;
+}
+.vistaNuevoReporte{
+ padding: 10px 0px;
+ display: none;
+}
+.listaItems .item{
+width: 100%;
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: flex-start;
+align-self: center;
+align-content: center;
+padding: 10px 0px;
+cursor: pointer;
+position: relative;
+
+        border-bottom:1px solid #ddd;
+}.
+.listaItems .item :hover{
+background-color: red;
+}
+.listaItems .item .img{
+	width: 75px;
+	height:75px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+.listaItems .item .info{
+	width: calc(100% - 80px);
+	padding: 0px 10px;
+}
+.listaItems .item .info .fecha{
+position: absolute;
+right: 0px;
+top: 0px;
+}
+.listaItems .item .info .titulo{
+	font-size: 20px;
+	font-weight: bold;
+}
+.listaItems .item .info .descripcion{
+	font-size: 16px;
+}
+
+.acciones{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
