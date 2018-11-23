@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Reporte Ciudadano</title>
+	<title>Reportapp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#EE6E73">
@@ -14,7 +14,7 @@
 	<nav class="nav-extended blue">
 		<div class="container">
 		    <div class="nav-wrapper">
-		      <a href="#" class="brand-logo"></b>Reporte Ciudadano</b></a>
+		      <a href="#" class="brand-logo"></b>Reportapp</b></a>
 		      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 		    </div>
 		</div>
@@ -31,45 +31,17 @@
   	<section class="vistaListaReportes">
   		 <div class="container">	
   		 	<div class="listaItems">
-  		 		<div class="item">
-  		 			<div class="img" style="background-image: url('img/soriana.png')"></div>
-  		 			<div class="info">
-  		 				<div class="fecha">01/08/18</div>
-  		 				<div class="titulo">Este es el titulo bien perron</div>
-  		 				<div class="descripcion">Este es un ejemplo de una descripcion</div>
-  		 			</div>
-
-  		 		</div>
-  		 			<div class="item">
-  		 			<div class="img" style="background-image: url('img/soriana.png')"></div>
-  		 			<div class="info">
-  		 				<div class="fecha">01/08/18</div>
-  		 				<div class="titulo">Este es el titulo bien perron</div>
-  		 				<div class="descripcion">Este es un ejemplo de una descripcion</div>
-  		 			</div>
-
-  		 		</div>
-  		 			<div class="item">
-  		 			<div class="img" style="background-image: url('img/soriana.png')"></div>
-  		 			<div class="info">
-  		 				<div class="fecha">01/08/18</div>
-  		 				<div class="titulo">Este es el titulo bien perron</div>
-  		 				<div class="descripcion">Este es un ejemplo de una descripcion</div>
-  		 			</div>
-
-  		 		</div>
   		 	</div>
-
   		 </div>
   		 <a class="btn-floating btn-large waves-effect waves-light green" id="btnNuevo"><i class="material-icons">add</i></a>
   	</section>
 
   	<section class="vistaNuevoReporte">
   		 <div class="container">
-  			 <form >
+  			 <form id="formReporte">
      			 <div class="row">
         			<div class="input-field">
-          				<input placeholder="Escribe el titulo del reporte." name="titulo" id="titlo" type="text">
+          				<input placeholder="Escribe el titulo del reporte." name="titulo" id="titulo" type="text">
           				<label for="titulo">Titulo</label>
      		   		</div>
     			</div>
@@ -82,7 +54,8 @@
 
     			<div class="acciones">
     				<div class="waves-effect waves-light red btn" id="btnCancelar"><i class="material-icons left">cancel</i>Cancelar</div>
-    				<div class="waves-effect waves-light green btn"><i class="material-icons left">save</i>Guardar</div>
+
+    				<div class="waves-effect waves-light green btn" id="btnGuardar"><i class="material-icons left">save</i>Guardar</div>
     				
     			</div>
     		</form>
@@ -94,6 +67,8 @@
 </body>
     <script src="js/jquery.min.js"></script>
     <script src="js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+        <script src="js/index.js"></script>
      <script>
 
   $(document).ready(function(){
@@ -102,14 +77,6 @@
 
   });
 
-  $(document).on('click','#btnNuevo',function() {
-  	$('.vistaListaReportes').hide();
-  	 $('.vistaNuevoReporte').fadeIn();
-  });
-   $(document).on('click','#btnCancelar',function() {
-   	  	 $('.vistaNuevoReporte').hide();
-  	$('.vistaListaReportes').fadeIn();
 
-  });
 </script>     
 </html>
