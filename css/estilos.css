@@ -66,3 +66,10 @@ top: 0px;
 	justify-content: space-between;
 	flex-direction: row;
 }
+#vizualizarImagen.activo{
+width: 100%;
+height:200px;
+background-repeat: no-repeat;
+background-size: contain;
+background-position: center;
+}
