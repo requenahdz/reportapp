@@ -7,11 +7,10 @@ $( document ).ready(function() {
     projectId: "reportapp-649e1",
     storageBucket: "reportapp-649e1.appspot.com",
     messagingSenderId: "960497270778"
-  };
+};
   firebase.initializeApp(config);   
-
-     firebase.database().ref("reportes/").orderByChild("fecha").on('value', function(snapshot) {
-
+    firebase.database().ref("reportes/").orderByChild("fecha").on('value', function(snapshot) {
+     	$('.vistaListaReportes .listaItems').html('');
     	$.each(snapshot.val(), function( index, value ) {
 		     var html="<div class='item'>"+
 		  		 			"<div class='img' style='background-image: url(img/soriana.png)'></div>"+
@@ -23,13 +22,9 @@ $( document ).ready(function() {
 		  		 		"</div>";
 	   		$('.vistaListaReportes .listaItems').prepend(html);
 	    });
-	   
   });  	
 
 })
-
-
-
 
 
 $('#formReporte').submit(function(e){
@@ -47,7 +42,6 @@ $('#formReporte').submit(function(e){
 		verLista();
 		//
 	 }
-
 });
 
 $(document).on('click','#btnGuardar',function(){
@@ -87,19 +81,18 @@ function limpiarFormulario(){
 }
 
 
-
 function getDay() {
 	function AddZero(num) {
-    return (num >= 0 && num < 10) ? "0" + num : num + "";
+    	return (num >= 0 && num < 10) ? "0" + num : num + "";
 	}
-  var now = new Date();
+	var now = new Date();
     var strDateTime = [[AddZero(now.getDate()), 
         AddZero(now.getMonth() + 1), 
         now.getFullYear()].join("/"), 
         [AddZero(now.getHours()), 
         AddZero(now.getMinutes())].join(":"), 
         now.getHours() >= 12 ? "PM" : "AM"].join(" ");
-    return strDateTime;	
+    	return strDateTime;	
 }
 
 
