@@ -13,7 +13,7 @@ $( document ).ready(function() {
      	$('.vistaListaReportes .listaItems').html('');
     	$.each(snapshot.val(), function( index, value ) {
 		     var html="<div class='item'>"+
-		  		 			"<div class='img' style='background-image: url(img/soriana.png)'></div>"+
+		  		 			"<div class='img' style='background-image: url("+value.url+")'></div>"+
 		  		 			"<div class='info'>"+
 		  		 				"<div class='fecha'>"+value.fecha+"</div>"+
 		  		 				"<div class='titulo'>"+value.titulo+"</div>"+
@@ -23,17 +23,6 @@ $( document ).ready(function() {
 	   		$('.vistaListaReportes .listaItems').prepend(html);
 	    });
   });  	
-
-    if ("geolocation" in navigator){ //check geolocation available 
-    //try to get user current location using getCurrentPosition() method
-    navigator.geolocation.getCurrentPosition(function(position){ 
-            console.log("Found your location nLat : "+position.coords.latitude+" nLang :"+ position.coords.longitude);
-        	$('#gps').html("Found your location nLat : "+position.coords.latitude+" nLang :"+ position.coords.longitude);
-
-        });
-}else{
-    console.log("Browser doesn't support geolocation!");
-}
 
 })
 
@@ -47,13 +36,21 @@ $('#formReporte').submit(function(e){
 		obj.descripcion=$('#descripcion').val();
 		obj.url=$('#url').val();
 		obj.fecha=getDay();
+		obj.latitude=0;
+		obj.longitude=0;
+
+		 if ("geolocation" in navigator){
+           navigator.geolocation.getCurrentPosition(function(position){ 
+            obj.latitude=position.coords.latitude;
+		    obj.longitude=position.coords.longitude;
+        });
+       }
 
 		//guardar datos;
 		firebase.database().ref('reportes').push().set(obj);
 		//Limpiar datos
 		limpiarFormulario();
 		verLista();
-		//
 	 }
 });
 
