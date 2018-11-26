@@ -1,6 +1,8 @@
 
+ var latitude=0;
+ var longitude=0;
 $( document ).ready(function() {
-  var config = {
+	var config = {
     apiKey: "AIzaSyA-kKxNgIANFXh55KttiHfRVzhojKixBhI",
     authDomain: "reportapp-649e1.firebaseapp.com",
     databaseURL: "https://reportapp-649e1.firebaseio.com",
@@ -8,23 +10,29 @@ $( document ).ready(function() {
     storageBucket: "reportapp-649e1.appspot.com",
     messagingSenderId: "960497270778"
 };
-  firebase.initializeApp(config);   
+    firebase.initializeApp(config);   
     firebase.database().ref("reportes/").orderByChild("fecha").on('value', function(snapshot) {
-     	$('.vistaListaReportes .listaItems').html('');
-    	$.each(snapshot.val(), function( index, value ) {
-		     var html="<div class='item'>"+
-		  		 			"<div class='img' style='background-image: url("+value.url+")'></div>"+
-		  		 			"<div class='info'>"+
-		  		 				"<div class='fecha'>"+value.fecha+"</div>"+
-		  		 				"<div class='titulo'>"+value.titulo+"</div>"+
-		  		 				"<div class='descripcion'>"+value.descripcion+"</div>"+
-		  		 			"</div>"+
-		  		 		"</div>";
-	   		$('.vistaListaReportes .listaItems').prepend(html);
-	    });
-  });  	
+    $('.vistaListaReportes .listaItems').html('');
+    $.each(snapshot.val(), function( index, value ) {
+		var html="<div class='item'>"+
+		  		    "<div class='img' style='background-image: url("+value.url+")'></div>"+
+		  		 		"<div class='info'>"+
+		  		 			"<div class='fecha'>"+value.fecha+"</div>"+
+		  		 			"<div class='titulo'>"+value.titulo+"</div>"+
+		  		 			"<div class='descripcion'>"+value.descripcion+"</div>"+
+		  		 		"</div>"+
+		  		 	"</div>";
+	   	$('.vistaListaReportes .listaItems').prepend(html);
+	});
 
-})
+	if ("geolocation" in navigator){
+        navigator.geolocation.getCurrentPosition(function(position){ 
+            longitude=position.coords.longitude
+            latitude=position.coords.latitude;
+        });
+    }
+  });  	
+});
 
 
 $('#formReporte').submit(function(e){
@@ -36,15 +44,8 @@ $('#formReporte').submit(function(e){
 		obj.descripcion=$('#descripcion').val();
 		obj.url=$('#url').val();
 		obj.fecha=getDay();
-		obj.latitude=0;
-		obj.longitude=0;
-
-		 if ("geolocation" in navigator){
-           navigator.geolocation.getCurrentPosition(function(position){ 
-            obj.latitude=position.coords.latitude;
-		    obj.longitude=position.coords.longitude;
-        });
-       }
+		obj.longitude=longitude;
+		obj.latitude=latitude;
 
 		//guardar datos;
 		firebase.database().ref('reportes').push().set(obj);
