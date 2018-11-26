@@ -44,6 +44,7 @@ $('#formReporte').submit(function(e){
 		obj.descripcion=$('#descripcion').val();
 		obj.url=$('#url').val();
 		obj.fecha=getDay();
+		alert(longitude+" "+latitude);
 		obj.longitude=longitude;
 		obj.latitude=latitude;
 
