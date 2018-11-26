@@ -13,8 +13,9 @@ $( document ).ready(function() {
     firebase.initializeApp(config);   
     firebase.database().ref("reportes/").orderByChild("fecha").on('value', function(snapshot) {
     $('.vistaListaReportes .listaItems').html('');
+    $('select').formSelect();
     $.each(snapshot.val(), function( index, value ) {
-		var html="<div class='item'>"+
+		var html="<div class='item' data-value='"+JSON.stringify(value)+"'>"+
 		  		    "<div class='img' style='background-image: url("+value.url+")'></div>"+
 		  		 		"<div class='info'>"+
 		  		 			"<div class='fecha'>"+value.fecha+"</div>"+
@@ -31,6 +32,7 @@ $( document ).ready(function() {
             latitude=position.coords.latitude;
         });
     }
+
   });  	
 });
 
@@ -44,7 +46,7 @@ $('#formReporte').submit(function(e){
 		obj.descripcion=$('#descripcion').val();
 		obj.url=$('#url').val();
 		obj.fecha=getDay();
-		alert(longitude+" "+latitude);
+		obj.prioridad=$('#prioridad').val();;
 		obj.longitude=longitude;
 		obj.latitude=latitude;
 
@@ -61,37 +63,47 @@ $(document).on('click','#btnGuardar',function(){
 });
 
 function validar(){
-	var validado=false;
+	var v1=false, v2=false,v3=false;
 	if($('#titulo').val().length>0){
-		validado=true;
-	}else{
-		validado=false;
+		v1=true;		
 	}
-
-	if($('#descripcion').val().length>0){
-		validado=true;
-	}else{
-		validado=false;
+	if($('#url').val()!=='false'){
+		v2=true;
 	}
-
-	if($('#url').val()!='false'){
-		validado=true;
-	}else{
-		validado=false;
+	if($('#prioridad').val().length>0){
+		v3=true;
 	}
-	return validado;
+	return v1 && v2 && v3;
 }
 
+$(document).on('click','.brand-logo',verLista)
 $(document).on('click','#btnNuevo',verFormulario);
 $(document).on('click','#btnCancelar',verLista);
+$(document).on('click','.listaItems .item',function(e){
+	$('.vistaNuevoReporte').hide();
+  	$('.vistaListaReportes').hide();
+    $('.vistaDetalle').fadeIn();
+     var datos=$(this).data('value');
+    $('.vistaDetalle .titulo').html(datos.titulo);
+    $('.vistaDetalle .prioridad').html(datos.prioridad);
+    $('.vistaDetalle .descripcion').html(datos.descripcion);
+    $('.vistaDetalle .imagen').css("background-image","url('"+datos.url+"')");
+
+     console.log(datos);
+
+});
+
 
 function verFormulario(){
+	   $('.vistaDetalle').hide();
 	$('.vistaListaReportes').hide();
   	$('.vistaNuevoReporte').fadeIn();
 }
 function verLista(){
+	   $('.vistaDetalle').hide();
    	$('.vistaNuevoReporte').hide();
   	$('.vistaListaReportes').fadeIn();
+  	limpiarFormulario();
 }
 function limpiarFormulario(){
 	$('#formReporte')[0].reset();

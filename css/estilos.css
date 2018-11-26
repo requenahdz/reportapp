@@ -84,3 +84,31 @@ background-position: center;
     font-size: 30px;
     font-weight: bold;
 }
+.vistaDetalle{
+	padding: 20px 0px;
+}
+.vistaDetalle .descripcion{
+
+	padding: 10px 0px;
+    text-align: center;
+}
+.vistaDetalle .imagen{
+	 width: 100%;
+    height: 350px;
+    padding: 10px 0px;
+    background-repeat: no-repeat;
+    background-size: contain;
+     background-position: center;
+}
+.vistaDetalle .titulo{
+	 text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+.vistaDetalle .prioridad{
+	    padding: 10px 0px;
+    text-align: center;
+    font-style: italic;
+    font-size: 16px;
+}
+

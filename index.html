@@ -4,7 +4,7 @@
 	<title>Reportapp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#EE6E73">
+    <meta name="theme-color" content="#9c27b0">
 	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	 <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
 	 <link href="css/estilos.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -22,8 +22,8 @@
 
   <ul class="sidenav" id="mobile-demo">
      <li><a href="#">INTEGRANTES</a></li>
-     <li><a href="#">Marisol Guadalupe Silva Hernández</a></li>
-     <li><a href="#">Ana Paola Macias Guerrero</a></li>
+     <li><a href="#">Marisol Guadalupe Silva</a></li>
+     <li><a href="#">Ana Paola Macias</a></li>
      <li><a href="#">Danna Paola Guevara</a></li>
      <li><a href="#">Maria Celeste Manriquez</a></li>
      <li><a href="#">Neydelin Lopez</a></li>
@@ -59,11 +59,6 @@
                  <div class="porcentaje"></div>
                </div>
           </div>
-
-          <div id="gps"></div>
-
-        
-        
    
    
      			 <div class="row">
@@ -79,6 +74,20 @@
 			        </div>
     			</div>
 
+          <div class="row">
+            <div class="input-field">
+          <select id="prioridad">
+            <option value="">Selecciona una opción</option>
+            <option value="Emergencia">Emergencia</option>
+            <option value="Urgente">Urgente</option>
+            <option value="Normal">Normal</option>
+          </select>
+          <label>Prioridad</label>
+            </div>
+          </div>
+
+
+
     			<div class="acciones">
     				<div class="waves-effect waves-light red btn" id="btnCancelar"><i class="material-icons left">cancel</i>Cancelar</div>
 
@@ -89,6 +98,16 @@
  	   </div>
   	
   	</section>
+    <section class="vistaDetalle">
+       <div class="container">
+      <div class="titulo"></div>
+      <div class="descripcion"></div>
+    
+      <div class="imagen"></div>
+      <div class="prioridad"></div>    
+      <div class="mapa" id="mapa"></div>
+    </div>
+    </section>
 
     
 </body>
