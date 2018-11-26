@@ -28,6 +28,8 @@ $( document ).ready(function() {
     //try to get user current location using getCurrentPosition() method
     navigator.geolocation.getCurrentPosition(function(position){ 
             console.log("Found your location nLat : "+position.coords.latitude+" nLang :"+ position.coords.longitude);
+        	$('#gps').html("Found your location nLat : "+position.coords.latitude+" nLang :"+ position.coords.longitude);
+
         });
 }else{
     console.log("Browser doesn't support geolocation!");
@@ -43,7 +45,9 @@ $('#formReporte').submit(function(e){
 		var obj= new Object();
 		obj.titulo=$('#titulo').val();
 		obj.descripcion=$('#descripcion').val();
+		obj.url=$('#url').val();
 		obj.fecha=getDay();
+
 		//guardar datos;
 		firebase.database().ref('reportes').push().set(obj);
 		//Limpiar datos
@@ -70,6 +74,12 @@ function validar(){
 	}else{
 		validado=false;
 	}
+
+	if($('#url').val()!='false'){
+		validado=true;
+	}else{
+		validado=false;
+	}
 	return validado;
 }
 
@@ -85,10 +95,12 @@ function verLista(){
   	$('.vistaListaReportes').fadeIn();
 }
 function limpiarFormulario(){
+	$('#formReporte')[0].reset();
 	$('#titulo').val('');
 	$('#descripcion').val('');
 	$('#imagen').val('');
-	$('#vizualizarImagen').css("background-image","url('')").removCalss('activo');
+	$('#url').val('false');
+	$('#vizualizarImagen').css("background-image","url('')").removeClass('activo');
 }
 
 
@@ -121,6 +133,31 @@ function getDay() {
       function fileOnload(e) {
       	$('#vizualizarImagen').css("background-image","url('"+e.target.result+"')").addClass('activo');
        }
+       var storageRef = firebase.storage().ref();
+       var metadata = { contentType: 'image/jpeg'};
+       var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+       uploadTask.on('state_changed', function(snapshot){
+       	$('#btnAbrirCamara').removeClass('blue black').addClass('black');
+       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+       console.log('Upload is ' + progress + '% done');
+       switch (snapshot.state) {
+       case firebase.storage.TaskState.PAUSED: 
+       console.log('Upload is paused');
+       break;
+       case firebase.storage.TaskState.RUNNING: 
+       console.log('Upload is running');
+       break;
+  }
+}, function(error) {
+
+}, function() {
+
+  uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+  	$('#btnAbrirCamara').removeClass('blue black').addClass('blue');
+  	$('#url').val(downloadURL);
+    console.log('File available at', downloadURL);
+  });
+});
 
      });
 

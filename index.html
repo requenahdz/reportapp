@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<nav class="nav-extended blue">
+	<nav class="nav-extended purple">
 		<div class="container">
 		    <div class="nav-wrapper">
 		      <a href="#" class="brand-logo"></b>Reportapp</b></a>
@@ -33,17 +33,17 @@
   		 	<div class="listaItems">
   		 	</div>
   		 </div>
-  		 <a class="btn-floating btn-large waves-effect waves-light green" id="btnNuevo"><i class="material-icons">add</i></a>
+  		 <a class="btn-floating btn-large waves-effect waves-light purple" id="btnNuevo"><i class="material-icons">add</i></a>
   	</section>
 
   	<section class="vistaNuevoReporte">
   		 <div class="container">
   			 <form id="formReporte">
-
+         <input type="hidden" name="url" id="url" value="false" />
           <div class="row">
             <div class="file-field input-field">
 
-              <div class="btn black">
+              <div class="btn black" id="btnAbrirCamara">
                 <span><i class="material-icons">camera_alt</i></span>
                <input type="file" name="imagen" id="imagen"  accept="image/*" capture="camera" />
               </div>
