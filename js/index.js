@@ -137,9 +137,10 @@ function getDay() {
        var metadata = { contentType: 'image/jpeg'};
        var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
        uploadTask.on('state_changed', function(snapshot){
-       	$('#btnAbrirCamara').removeClass('blue black').addClass('black');
+       $('#btnAbrirCamara').removeClass('blue black').addClass('black');
+       $('#vizualizarImagen .porcentaje').fadeIn();
        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-       console.log('Upload is ' + progress + '% done');
+        $('#vizualizarImagen .porcentaje').html( parseFloat(progress).toFixed(0) + '%');
        switch (snapshot.state) {
        case firebase.storage.TaskState.PAUSED: 
        console.log('Upload is paused');
@@ -154,7 +155,9 @@ function getDay() {
 
   uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
   	$('#btnAbrirCamara').removeClass('blue black').addClass('blue');
+  	  $('#vizualizarImagen .porcentaje').fadeOut();
   	$('#url').val(downloadURL);
+
     console.log('File available at', downloadURL);
   });
 });
