@@ -88,9 +88,7 @@ $(document).on('click','.listaItems .item',function(e){
     $('.vistaDetalle .prioridad').html(datos.prioridad);
     $('.vistaDetalle .descripcion').html(datos.descripcion);
     $('.vistaDetalle .imagen').css("background-image","url('"+datos.url+"')");
-
-     console.log(datos);
-
+    $('.vistaDetalle .enlace').attr('href',datos.url);
 });
 
 
