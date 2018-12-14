@@ -15,14 +15,14 @@ $( document ).ready(function() {
     $('.vistaListaReportes .listaItems').html('');
     $('select').formSelect();
     $.each(snapshot.val(), function( index, value ) {
-		var html="<div class='item' data-value='"+JSON.stringify(value)+"'>"+
+		var html="<a href='"value.url"'><div class='item' data-value='"+JSON.stringify(value)+"'>"+
 		  		    "<div class='img' style='background-image: url("+value.url+")'></div>"+
 		  		 		"<div class='info'>"+
 		  		 			"<div class='fecha'>"+value.fecha+"</div>"+
 		  		 			"<div class='titulo'>"+value.titulo+"</div>"+
 		  		 			"<div class='descripcion'>"+value.descripcion+"</div>"+
 		  		 		"</div>"+
-		  		 	"</div>";
+		  		 	"</div></a>";
 	   	$('.vistaListaReportes .listaItems').prepend(html);
 	});
 
